@@ -1,0 +1,109 @@
+{
+    "version": "1.4",
+    "FR": {
+        "menu": {
+            "add_pass": "Ajouter",
+            "list": "Lister",
+            "cmd": "Commandes",
+            "doc": "Documentation",
+            "clear": "Clear"
+        },
+        "error": {
+            "choice": "Choix invalide. Taper 3 pour lister les commandes."
+        },
+        "help_menu": {
+            "add_pass": "Ajouter informations, identifications",
+            "search": "Rechercher un MDP avec un mot clé",
+            "find": "Trouver un mot de passe avec son ID",
+            "list": "Afficher toute la liste des MDP",
+            "emails": "Afficher toute les emails",
+            "sort_asc": "Trier par date ascendante",
+            "sort_desc": "Trier par date descendante",
+            "edit": "Modifier un MDP",
+            "remove": "Supprimer un mot de passe",
+            "cmd": "Affichier la liste de commandes",
+            "update": "Voir si mise à jour disponible",
+            "clear": "nettoyer la console",
+            "opend_dir": "Ouvrir dossier qui contient les MDP",
+            "help": "Ouvrire la notice (page web)",
+            "logout": "Deconnecter la session",
+            "exit": "Quitter l'application"
+        },
+        "first_menu_setup": {
+            "p1": "[*] Configuration du nouveau mot de passe.",
+            "pass1": "Définir le nouveau mot de passe principal : ",
+            "pass2": "Confirmer le mot de passe principal : ",
+            "pass_inco": "[!] Les mots de passe ne correspondent pas.",
+            "becarfull": "[!] ATTENTION [!]",
+            "p2": "Votre mot de passe principal va être défini.",
+            "p3": "Une nouvelle clé de chiffrement sera générée.",
+            "p4": "Si des données existantes ont été chiffrées, avec une ancienne clé.",
+            "p6": "elles pourraient devenir illisibles.",
+            "p7": "[+] Pensez à sauvegarder le fichier config.local.json à la racine de ce dossier",
+            "p8": "[+] Pensez à sauvegarder le fichier safebox.json à ce chemin : ",
+            "conf_pass": "Voulez-vous vraiment continuer ? (yes/no) > ",
+            "conf_ok": "Configuration terminée.",
+            "out": "Annulation en cours..."
+        },
+        "update": {
+            "available": "Mise à jour disponible",
+            "v_local": "votre version",
+            "v_online": "nouvelle version",
+            "dwnl_help": "Vous pouvez télécharger la nouvelle version ici.",
+            "success": "SafeBox est à jour"
+        }
+    },
+    "EN": {
+        "menu": {
+            "add_pass": "Add",
+            "list": "List",
+            "cmd": "Commands",
+            "doc": "Documentation",
+            "clear": "Clear"
+        },
+        "error": {
+            "choice": "Invalid choice. Type 3 to list the commands."
+        },
+        "help_menu": {
+            "add_pass": "Add new credentials",
+            "search": "Search for a keyword in services or logins",
+            "find": "Search password by ID",
+            "list": "Display all information",
+            "emails": "Display all emails register",
+            "sort_asc": "Sorts passwords by ascending date",
+            "sort_desc": "Sorts passwords by descending date",
+            "edit": "Modify information by ID",
+            "remove": "Removes a password by ID",
+            "cmd": "Displays list of commands",
+            "update": "Check update is available",
+            "clear": "Clear the console",
+            "opend_dir": "Open dir safebox.json (all informations)",
+            "help": "Open Notive (HTML)",
+            "logout": "Logout session, reset app",
+            "exit": "Exits program"
+        },
+        "first_menu_setup": {
+            "p1": "[*] Configure new password.",
+            "pass1": "Set new master password: ",
+            "pass2": "Confirm master password: ",
+            "pass_inco": "[!] Passwords do not match.",
+            "becarfull": "[!] WARNING [!]",
+            "p2": "Your master password will be configured.",
+            "p3": "A new encryption key will be generated.",
+            "p4": "If existing data has been encrypted, with an old key.",
+            "p6": "it may become unreadable.",
+            "p7": "[+] Remember to backup the config.local.json file located in the root folder.",
+            "p8": "[+] Remember to backup the safebox.json file located at: ",
+            "conf_pass": "Do you really want to continue? (yes/no) > ",
+            "conf_ok": "Configuration completed.",
+            "out": "Cancelling..."
+        },
+        "update": {
+            "available": "Update available",
+            "v_local": "your version",
+            "v_online": "new version",
+            "dwnl_help": "You can download the new version here",
+            "success": "SafeBox is up to date"
+        }
+    }
+}
