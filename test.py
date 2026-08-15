@@ -58,8 +58,3 @@ logger = setup_logger()
 # if check_if_config_file_exist() is True:
 #     # remove file config (because is empty...)
 #     print("file config exist !")
-
-# test dev
-
-
-# test grevecservice
