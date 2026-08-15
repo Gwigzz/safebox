@@ -33,7 +33,7 @@ from colorama import Fore, Style, just_fix_windows_console
 # LOCAL IMPORTS
 # ======================
 
-from constants import EMAIL_REGEX, BASE_URL
+from constants import EMAIL_REGEX
 
 from safebox_setup import create_and_configure_file_config
 
@@ -64,9 +64,6 @@ from functions import (
 )
 
 # ------------------ END IMPORT LIBS ------------------
-
-# URL github repo path file
-ICO_URL      = BASE_URL + 'ico.ico'
 
 # ------------------ [!] Check if app already running [!] ------------------
 mutex = ctypes.windll.kernel32.CreateMutexW(None, False, "SafeBoxUniqueMutex")
@@ -228,6 +225,9 @@ def open_safebox_directory():
     except Exception as err:
         txtError(f"ERROR. Impossible open dir -> {err}")
 
+
+# ------------ Main Functions ------------
+
 def add_credentials():
 
     txt("\n--- Add credentials ---", Fore.CYAN)
@@ -261,7 +261,6 @@ def add_credentials():
     txtSuccess("Success")
     txtInfo(f"ID: {get_id}")
 
-
 def show_list(tri=None):
 
     data = get_credentials()
@@ -291,9 +290,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
     except Exception as err:
         txtError("Error. Data corruption.")
         txtError(f"Current key is not compatible with register key.")
-
-
-
 
 def list_emails():
     """
@@ -325,8 +321,6 @@ def list_emails():
 {'-' * 40}""")
 
     txt(f"\n---------- ({len(emails)}) Results ----------\n", Fore.GREEN)
-
-        
 
 def search_by_keyword(keyword):
 
@@ -365,7 +359,6 @@ Password   : {Fore.BLACK}{entry['password']}{Style.RESET_ALL}
     else:
         txtInfo(f"No results found for '{keyword}'")
 
-
 def remove_password(id_):
 
     print(f"{'-' * 40}")
@@ -398,7 +391,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
             return
     txtInfo(f"No credentials found with ID '{id_}'.")
 
-
 def find_password(id_):
 
     # if not check_main_psw():
@@ -420,7 +412,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
             return
 
     txt(f"No credentials found with ID {id_}.", Fore.YELLOW)
-
 
 def edit_password(id_):
 
@@ -467,6 +458,7 @@ Password   : {Fore.BLACK}{current_pass}{Style.RESET_ALL}
     txtInfo(f"No credentials found with ID : {id_}.")
 
 
+# ------------ Menu Commands ------------
 
 def show_commands():
     print(f"""{Fore.LIGHTCYAN_EX}
@@ -584,7 +576,7 @@ def menu():
                 txtError(f"'{choix}' {lang.error.choice}")
 
 
-# ==================== POINT D'ENTRÉE ======================
+# ==================== ENTRY POINT ======================
 if __name__ == "__main__":
 
     # icon arrière plan 

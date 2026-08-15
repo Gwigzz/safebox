@@ -27,8 +27,7 @@ FILE_LOG            = "safebox.log"
 # =========== Default config.local.json & settings.json ===========
 DEFAULT_CONFIG_JSON = {"password_hash": "", "salt": "" }
 
-BASE_URL            = "https://raw.githubusercontent.com/Gwigzz/test_version/main/"
-BASE_URL_SETTINGS   = BASE_URL + FILE_SETTINGS_NAME
+BASE_URL            = "https://raw.githubusercontent.com/Gwigzz/safebox/main/"
 
 DEFAULT_SETTINGS_JSON = {
     "lang": "EN",
