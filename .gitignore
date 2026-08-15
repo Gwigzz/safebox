@@ -1,5 +1,6 @@
 __pycache__
 doc/*zip
+doc/release_1.5.0/
 .venv/
 venv/
 build/
