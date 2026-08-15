@@ -43,7 +43,7 @@ from safebox_security import (
 )
 
 from safebox_setup import first_security_setup
-from safebox_update import compare_settings, get_online_version, get_local_version
+# from safebox_update import compare_settings, get_online_version, get_local_version
 
 # colorama
 init()

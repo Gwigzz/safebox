@@ -46,8 +46,6 @@ from safebox_security import (
     get_safebox_file
 )
 
-from safebox_update import check_versions
-
 from functions import (
     create_default_icon,
     load_language,
@@ -533,7 +531,7 @@ def handle_commands(choix):
 
         "--edit": lambda args: edit_password(args),
 
-        "--update": lambda args: check_versions(),
+        "--update": lambda args: txtInfo("Please, check if new version is enable on this official SafeBox app. : "),
 
         "--exit": lambda args: on_exit()
     }

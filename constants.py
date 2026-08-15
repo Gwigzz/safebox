@@ -30,14 +30,13 @@ DEFAULT_CONFIG_JSON = {"password_hash": "", "salt": "" }
 BASE_URL            = "https://raw.githubusercontent.com/Gwigzz/test_version/main/"
 BASE_URL_SETTINGS   = BASE_URL + FILE_SETTINGS_NAME
 
-#  [!] Check if it wouldn't be better to download the file from the repository???
 DEFAULT_SETTINGS_JSON = {
     "lang": "EN",
-    "app_version": "1.5.1",
-    "release_date": "08-08-2026",
+    "app_version": "1.5.0",
+    "release_date": "10-08-2026",
     "url_website": "https://grdev.tech",
     "url_documentation": "https://grdev.tech/app/safebox/doc_FR.html"
 }
-""" Usef for initializing app """
+""" Used during initializing app """
 
 EMAIL_REGEX         = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
