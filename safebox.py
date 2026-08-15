@@ -33,7 +33,7 @@ from colorama import Fore, Style, just_fix_windows_console
 # LOCAL IMPORTS
 # ======================
 
-from constants import EMAIL_REGEX
+from constants import EMAIL_REGEX, RELEASE_URL
 
 from safebox_setup import create_and_configure_file_config
 
@@ -62,8 +62,8 @@ from functions import (
     exists,
     open_documentation
 )
-
 # ------------------ END IMPORT LIBS ------------------
+
 
 # ------------------ [!] Check if app already running [!] ------------------
 mutex = ctypes.windll.kernel32.CreateMutexW(None, False, "SafeBoxUniqueMutex")
@@ -80,13 +80,14 @@ ctypes.windll.kernel32.SetConsoleTitleW.argtypes = [ctypes.c_wchar_p]
 
 def set_console_title(title):
     ctypes.windll.kernel32.SetConsoleTitleW(title)
-
 # ============================================
 
 # init colorama (Require for color text)
 just_fix_windows_console()
 
 # ============================================
+
+# ------------ Init app ------------
 
 # Check if config.local.json exist
 if not check_if_config_file_exist():
@@ -101,6 +102,7 @@ if not check_if_config_file_exist():
         input("Press enter to quit... ")
         sys.exit()
 
+# ------------ Auth ------------
 def authenticate_and_generate_key():
     """ Authenticate user, checking hash, salt ... if ok, generate key for fernet """
     
@@ -156,7 +158,6 @@ def banner():
 # ----------------- ICON TASKBAR PYSTRAY -----------------
 display_app = ctypes.windll.kernel32.GetConsoleWindow()
 
-
 # check if ico.ico exist
 if exists("ico.ico"):
     image = Image.open("ico.ico")
@@ -205,16 +206,22 @@ icon = pystray.Icon(
 ))
 # ------------------------------------------------------
 
-# ====================== APP FONCTIONS ========================
+# ------------ Functions ------------
+
+def release():
+    txtInfo(f"Your Version : {VERSION_APP}")
+    txtInfo(f"Please, manually check the repository to see if a new version is available :")
+    txt(f"{Fore.CYAN}{RELEASE_URL}{Style.RESET_ALL}")
+    return
 
 # [!] BUGUED !!!
-def restart_app():
-    clear_console()
+# def restart_app():
+#     clear_console()
 
-    if getattr(sys, "frozen", False):
-        os.execv(sys.executable, [sys.executable] + sys.argv[1:])
-    else:
-        os.execv(sys.executable,[sys.executable, os.path.abspath(sys.argv[0])] + sys.argv[1:])
+#     if getattr(sys, "frozen", False):
+#         os.execv(sys.executable, [sys.executable] + sys.argv[1:])
+#     else:
+#         os.execv(sys.executable,[sys.executable, os.path.abspath(sys.argv[0])] + sys.argv[1:])
 
 def open_safebox_directory():
     """ Open the dir which content safebox.json file """
@@ -495,7 +502,7 @@ def handle_commands(choix):
     """ Set the commands for the console """
 
     commands = {
-        "--logout": lambda args: restart_app(),
+        "--logout": lambda args: txtInfo("Feature currently unavailable."),
 
         "--cmd": lambda args: show_commands(),
 
@@ -523,7 +530,7 @@ def handle_commands(choix):
 
         "--edit": lambda args: edit_password(args),
 
-        "--update": lambda args: txtInfo("Please, check if new version is enable on this official SafeBox app. : "),
+        "--update": lambda args: release(),
 
         "--exit": lambda args: on_exit()
     }
