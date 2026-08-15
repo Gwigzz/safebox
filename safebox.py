@@ -33,7 +33,7 @@ from colorama import Fore, Style, just_fix_windows_console
 # LOCAL IMPORTS
 # ======================
 
-from constants import EMAIL_REGEX, BASE_URL
+from constants import EMAIL_REGEX, RELEASE_URL
 
 from safebox_setup import create_and_configure_file_config
 
@@ -45,8 +45,6 @@ from safebox_security import (
     get_credentials,
     get_safebox_file
 )
-
-from safebox_update import check_versions
 
 from functions import (
     create_default_icon,
@@ -64,11 +62,8 @@ from functions import (
     exists,
     open_documentation
 )
-
 # ------------------ END IMPORT LIBS ------------------
 
-# URL github repo path file
-ICO_URL      = BASE_URL + 'ico.ico'
 
 # ------------------ [!] Check if app already running [!] ------------------
 mutex = ctypes.windll.kernel32.CreateMutexW(None, False, "SafeBoxUniqueMutex")
@@ -85,13 +80,14 @@ ctypes.windll.kernel32.SetConsoleTitleW.argtypes = [ctypes.c_wchar_p]
 
 def set_console_title(title):
     ctypes.windll.kernel32.SetConsoleTitleW(title)
-
 # ============================================
 
 # init colorama (Require for color text)
 just_fix_windows_console()
 
 # ============================================
+
+# ------------ Init app ------------
 
 # Check if config.local.json exist
 if not check_if_config_file_exist():
@@ -106,6 +102,7 @@ if not check_if_config_file_exist():
         input("Press enter to quit... ")
         sys.exit()
 
+# ------------ Auth ------------
 def authenticate_and_generate_key():
     """ Authenticate user, checking hash, salt ... if ok, generate key for fernet """
     
@@ -161,7 +158,6 @@ def banner():
 # ----------------- ICON TASKBAR PYSTRAY -----------------
 display_app = ctypes.windll.kernel32.GetConsoleWindow()
 
-
 # check if ico.ico exist
 if exists("ico.ico"):
     image = Image.open("ico.ico")
@@ -210,16 +206,22 @@ icon = pystray.Icon(
 ))
 # ------------------------------------------------------
 
-# ====================== APP FONCTIONS ========================
+# ------------ Functions ------------
+
+def release():
+    txtInfo(f"Your Version : {VERSION_APP}")
+    txtInfo(f"Please, manually check the repository to see if a new version is available :")
+    txt(f"{Fore.CYAN}{RELEASE_URL}{Style.RESET_ALL}")
+    return
 
 # [!] BUGUED !!!
-def restart_app():
-    clear_console()
+# def restart_app():
+#     clear_console()
 
-    if getattr(sys, "frozen", False):
-        os.execv(sys.executable, [sys.executable] + sys.argv[1:])
-    else:
-        os.execv(sys.executable,[sys.executable, os.path.abspath(sys.argv[0])] + sys.argv[1:])
+#     if getattr(sys, "frozen", False):
+#         os.execv(sys.executable, [sys.executable] + sys.argv[1:])
+#     else:
+#         os.execv(sys.executable,[sys.executable, os.path.abspath(sys.argv[0])] + sys.argv[1:])
 
 def open_safebox_directory():
     """ Open the dir which content safebox.json file """
@@ -229,6 +231,9 @@ def open_safebox_directory():
         os.startfile(folder)
     except Exception as err:
         txtError(f"ERROR. Impossible open dir -> {err}")
+
+
+# ------------ Main Functions ------------
 
 def add_credentials():
 
@@ -263,7 +268,6 @@ def add_credentials():
     txtSuccess("Success")
     txtInfo(f"ID: {get_id}")
 
-
 def show_list(tri=None):
 
     data = get_credentials()
@@ -293,9 +297,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
     except Exception as err:
         txtError("Error. Data corruption.")
         txtError(f"Current key is not compatible with register key.")
-
-
-
 
 def list_emails():
     """
@@ -327,8 +328,6 @@ def list_emails():
 {'-' * 40}""")
 
     txt(f"\n---------- ({len(emails)}) Results ----------\n", Fore.GREEN)
-
-        
 
 def search_by_keyword(keyword):
 
@@ -367,7 +366,6 @@ Password   : {Fore.BLACK}{entry['password']}{Style.RESET_ALL}
     else:
         txtInfo(f"No results found for '{keyword}'")
 
-
 def remove_password(id_):
 
     print(f"{'-' * 40}")
@@ -400,7 +398,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
             return
     txtInfo(f"No credentials found with ID '{id_}'.")
 
-
 def find_password(id_):
 
     # if not check_main_psw():
@@ -422,7 +419,6 @@ Password   : {Fore.BLACK}{decrypt_data(entry['password'], fernet)}{Style.RESET_A
             return
 
     txt(f"No credentials found with ID {id_}.", Fore.YELLOW)
-
 
 def edit_password(id_):
 
@@ -469,6 +465,7 @@ Password   : {Fore.BLACK}{current_pass}{Style.RESET_ALL}
     txtInfo(f"No credentials found with ID : {id_}.")
 
 
+# ------------ Menu Commands ------------
 
 def show_commands():
     print(f"""{Fore.LIGHTCYAN_EX}
@@ -505,7 +502,7 @@ def handle_commands(choix):
     """ Set the commands for the console """
 
     commands = {
-        "--logout": lambda args: restart_app(),
+        "--logout": lambda args: txtInfo("Feature currently unavailable."),
 
         "--cmd": lambda args: show_commands(),
 
@@ -533,7 +530,7 @@ def handle_commands(choix):
 
         "--edit": lambda args: edit_password(args),
 
-        "--update": lambda args: check_versions(),
+        "--update": lambda args: release(),
 
         "--exit": lambda args: on_exit()
     }
@@ -586,7 +583,7 @@ def menu():
                 txtError(f"'{choix}' {lang.error.choice}")
 
 
-# ==================== POINT D'ENTRÉE ======================
+# ==================== ENTRY POINT ======================
 if __name__ == "__main__":
 
     # icon arrière plan 

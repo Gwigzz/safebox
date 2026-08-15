@@ -1,9 +1,8 @@
-import requests
 import json
 
 from functions import txt, txtError,txtInfo, txtSuccess, load_language
 
-from constants import FILE_SETTINGS, BASE_URL_SETTINGS
+from constants import FILE_SETTINGS
 
 
 # TEST FOR URL USER DOWNLOAD LAST VERSION APP : https://github.com/Gwigzz/safebox
@@ -14,18 +13,18 @@ lang = load_language()
 def version_to_tuple(version):
     return tuple(map(int, version.split(".")))
 
-def get_online_version():
-    """ return online version from github repo """
-    if BASE_URL_SETTINGS is False:
-        txtError(f"Update url is invalid or empty in settings.json. URL : {BASE_URL_SETTINGS}")
-        input('...')
-    try:
-        data = requests.get(BASE_URL_SETTINGS, timeout=5).json()
-        return data
-    except Exception as err:
-        print(f"Error checking online version ... Please try again or contact us. Code error : ({err})")
-        input('...')
-        return False
+# def get_online_version():
+#     """ return online version from github repo """
+#     if BASE_URL_SETTINGS is False:
+#         txtError(f"Update url is invalid or empty in settings.json. URL : {BASE_URL_SETTINGS}")
+#         input('...')
+#     try:
+#         data = requests.get(BASE_URL_SETTINGS, timeout=5).json()
+#         return data
+#     except Exception as err:
+#         print(f"Error checking online version ... Please try again or contact us. Code error : ({err})")
+#         input('...')
+#         return False
 
 def get_local_version():
     """ return current local version from computeur """
@@ -37,34 +36,34 @@ def get_local_version():
         print(f"Error checking local version ... ({err})")
         return False
 
-def check_versions():
+# def check_versions():
 
-    online  = get_online_version()
-    local   = get_local_version()
+#     online  = get_online_version()
+#     local   = get_local_version()
 
-    online_version      = online.get('app_version')
-    local_version       = local.get('app_version')
+#     online_version      = online.get('app_version')
+#     local_version       = local.get('app_version')
 
-    if not online:
-        txtError("Error get_online_version()")
-        return
+#     if not online:
+#         txtError("Error get_online_version()")
+#         return
         
-    if not local:
-        txtError("Error get_local_version()")
-        return
+#     if not local:
+#         txtError("Error get_local_version()")
+#         return
 
-    # compare version
-    if version_to_tuple(online_version) > version_to_tuple(local_version):
+#     # compare version
+#     if version_to_tuple(online_version) > version_to_tuple(local_version):
 
-        txtInfo(f"{lang.update.available}")
+#         txtInfo(f"{lang.update.available}")
 
-        txtError(f"{lang.update.v_local}: {local_version}")
-        txtSuccess(f"{lang.update.v_online}: {online_version}")
+#         txtError(f"{lang.update.v_local}: {local_version}")
+#         txtSuccess(f"{lang.update.v_online}: {online_version}")
 
-        txtInfo(f"{lang.update.dwnl_help} : {URL_DOWNLOAD_APP}")
+#         txtInfo(f"{lang.update.dwnl_help} : {URL_DOWNLOAD_APP}")
 
-    else:
-        txtSuccess(f"{lang.update.success} V {local_version}")
+#     else:
+#         txtSuccess(f"{lang.update.success} V {local_version}")
 
 # --------------------------------------
 
