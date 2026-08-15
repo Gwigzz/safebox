@@ -166,8 +166,8 @@ def first_security_setup():
 
             # remove file config.local.json, because is empty, not configured, when user restarting app, app is bugged
             if check_if_config_file_exist() is True:
-                # remove file config (because is empty...)
                 try:
+                    # remove file config (because is empty...)
                     os.remove(get_config_path())
                 except Exception as err:
                     print(f"Error removing config.local.json file. Please remove manually for new init app. : {err}")

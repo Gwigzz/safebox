@@ -8,7 +8,7 @@ from colorama import Fore, Style, just_fix_windows_console
 
 from logger_config import setup_logger
 
-from constants import FILE_CONFIG, FILE_LANG, DIR_NAME_BACKUP, FILE_SETTINGS, DEFAULT_SETTINGS_JSON, APP_NAME
+from constants import FILE_CONFIG, FILE_LANG, DIR_NAME_BACKUP, FILE_SETTINGS, DEFAULT_SETTINGS_JSON, APP_NAME, URL_GITHUB_CONTENT
 
 ##############################################
 ### I don't know where to put all this shit. #
@@ -93,7 +93,7 @@ def load_language():
 
     # check if file lang exist
     if not exists(FILE_LANG):
-        print("This file language not exist. Please download this.")
+        print(f"File langage 'lang.json' missing. Please download it from this address: {URL_GITHUB_CONTENT}")
         input("...")
 
     lang = settings.get("lang", "EN")
@@ -105,7 +105,6 @@ def load_language():
 
 # --------------------------------------------------------------
 
-
 def open_documentation():
 
     url_documentation = getSettings().get('url_documentation')
@@ -115,7 +114,6 @@ def open_documentation():
         txtInfo(f"Website Notice : {url_documentation}")
     except:
             txtError(f"Error opening web browser. Please visite {url_documentation}")
-
 
 
 ########################

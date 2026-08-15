@@ -102,6 +102,7 @@ From Official Repo : [https://github.com/Gwigzz/safebox](https://github.com/Gwig
 ```
 
 ## Compilation .exe (pyinstaller)
+- [!] Need to be compiled in VENV python
 ```
 > pyinstaller --onefile --console --icon=ico.ico safebox.py
 ``` 

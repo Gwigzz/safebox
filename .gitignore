@@ -1,4 +1,5 @@
 __pycache__
+doc/*zip
 .venv/
 venv/
 build/
